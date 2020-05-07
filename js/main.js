@@ -19,8 +19,16 @@ const loginForm = document.querySelector(`#loginForm`);
 const loginInput = document.querySelector(`#login`);
 const userName = document.querySelector(`.user-name`);
 const buttonOut = document.querySelector(`.button-out`);
+const cardsRestaurants = document.querySelector(.cards-restaurants);
+
 
 let login = localStorage.getItem(`gloDelivery`);
+
+
+
+
+
+// Переменные
 
 function toogleModalAuth() {
   modalAuth.classList.toggle("is-open");
