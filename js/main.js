@@ -25,6 +25,11 @@ let login = localStorage.getItem(`gloDelivery`);
 
 // Переменные
 
+const valid = function(str){
+  const nameReg = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
+  return nameReg.test(str);
+}
+
 function toggleModal() {
   modal.classList.toggle("is-open");
 }
@@ -44,10 +49,10 @@ function authorized() {
     buttonOut.style.display = ``;
     buttonOut.removeEventListener(`click` , logOut)
     checkAuth();
+    
 
   }
 
-  console.log(`авторизован`);
   userName.textContent = login;
   buttonAuth.style.display = `none`;
   userName.style.display = `inline`;
@@ -58,12 +63,10 @@ function authorized() {
 
 function notAuthorized () {
 
-  console.log(`не авторизован`);
-
   function logIn(event){
     event.preventDefault();
 
-    if(loginInput.value.trim()){
+    if (valid(loginInput.value.trim())){
       login = loginInput.value;
       localStorage.setItem(`gloDelivery`, login)
       toogleModalAuth();
@@ -74,6 +77,7 @@ function notAuthorized () {
       checkAuth();
     } else{
       loginInput.style.border = `3px solid red`;
+      loginInput.value = '';
     }
   }
 
@@ -151,6 +155,13 @@ function openGoods(event) {
   const restaurant = target.closest('.card-restaurant');
 
   if (restaurant) {
+
+    if (login) {
+
+
+
+    
+
     cardsMenu.textContent = '';
     containerPromo.classList.add('hide');
     restaurants.classList.add('hide');
@@ -159,7 +170,10 @@ function openGoods(event) {
     createCardGood();
     createCardGood();
     createCardGood();
+  } else {
+    toogleModalAuth();
   }
+}
   
   
 
@@ -186,4 +200,12 @@ checkAuth();
 createCardRestaurant();
 createCardRestaurant();
 createCardRestaurant();
+
+new Swiper('.swiper-container', {
+  loop: true,
+  autoplay: {
+    delay: 5000,
+    
+  },
+})
 
